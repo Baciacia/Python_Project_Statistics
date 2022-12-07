@@ -48,32 +48,47 @@ def corrcoef_(matrix):
     ansAge = matrix[1].sort()
     print(np.corrcoef(ansIQ, ansAge))
 
-def SaveEachColumn():
-    #column_input = input("Coloana : ")
-    #if column_input == "Age":
-     #   column = 0
-    #elif column_input == "IQ":
-     #   column = 1
-    #elif column_input == "Sex":
-     #   column = 2
-    #elif column_input == "Nationality":
-     #   column = 3
+def main():
+    column_input = input("Coloana : ")
+    if column_input == "age":
+        column = 0
+    elif column_input == "IQ":
+        column = 1
+    elif column_input == "Sex":
+        column = 2
+    elif column_input == "Nationality":
+        column = 3
 
-    plt.rcParams["figure.figsize"] = [10.50, 5.50]
-    plt.rcParams["figure.autolayout"] = True
-    headers = ['varsta', 'IQ']
-    df = pd.read_csv('info.csv', usecols=headers)
-    print(df)
-    plt.plot(df.varsta, df.IQ)
-    #plt.show()
-    x = pd.Series(df.varsta)
-    y = pd.Series(df.IQ)
-    correlation = x.corr(y)
-    print(correlation)
-    plt.scatter(x, y)
-    plt.plot(np.unique(x), np.poly1d(np.polyfit(x, y, 1))
-    (np.unique(x)), color='red')
+    if column == 2 or column == 3:
+        print("Nu se poate calcula")
+    else:
+        plt.rcParams["figure.figsize"] = [10.50, 5.50]
+        plt.rcParams["figure.autolayout"] = True
+        headers = ['varsta', 'IQ']
+        df = pd.read_csv('info.csv', usecols=headers)
+        print(df)
+
+        if column == 0:
+            medie(df,0)
+            mediana(df,0)
+            standard_deviation(df,0)
+            min_max(df,0)
+            quantile_(df,0)
+        else:
+            medie(df, 1)
+            mediana(df, 1)
+            standard_deviation(df, 1)
+            min_max(df, 1)
+            quantile_(df, 1)
+
+        x = pd.Series(df.varsta)
+        y = pd.Series(df.IQ)
+        correlation = x.corr(y)
+        print(correlation)
+        plt.scatter(x, y)
+        plt.plot(np.unique(x), np.poly1d(np.polyfit(x, y, 1))(np.unique(x)), color='red')
+        plt.show()
 
 
-SaveEachColumn()
+main()
 
