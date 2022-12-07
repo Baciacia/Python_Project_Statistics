@@ -12,40 +12,40 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def medie(matrix,column):
+def medie(column):
     suma = ct = 0
-    for i in range(0, len(matrix[column])):
-        suma = suma + int(matrix[i][column])
+    for i in range(0, len(column)):
+        suma = suma + int(column[i])
         ct = ct + 1
     if ct == 0:
         print(0)
     else:
         print(suma//ct)
 
-def mediana(matrix,column):
-    ans = matrix[column].sort()
+def mediana(column):
+    ans = column.sort()
     print(statistics.median(ans))
 
-def standard_deviation(matrix, column):
-    ans = matrix[column].sort()
+def standard_deviation(column):
+    ans = column.sort()
     print(np.std(ans))
 
-def min_max(matrix,column):
-    ans = matrix[column].sort()
+def min_max(column):
+    ans = column.sort()
     print(ans[0], ans[len(ans) - 1])
 
-def quantile_(matrix, column):
-    ans = matrix[column].sort()
+def quantile_(column):
+    ans = column.sort()
     ans.quantile([0.25,0.5,0.75])
 
-def corelatie(matrix):
-    ansIQ = matrix[0].sort()
-    ansAge = matrix[1].sort()
+def corelatie(column1, column2):
+    ansAge = column1.sort()
+    ansIQ = column2.sort()
     print(covariance(ansIQ,ansAge))
 
-def corrcoef_(matrix):
-    ansIQ = matrix[0].sort()
-    ansAge = matrix[1].sort()
+def corrcoef_(column1, column2):
+    ansAge = column1.sort()
+    ansIQ = column2.sort()
     print(np.corrcoef(ansIQ, ansAge))
 
 def main():
@@ -67,22 +67,22 @@ def main():
         headers = ['varsta', 'IQ']
         df = pd.read_csv('info.csv', usecols=headers)
         print(df)
-
-        if column == 0:
-            medie(df,0)
-            mediana(df,0)
-            standard_deviation(df,0)
-            min_max(df,0)
-            quantile_(df,0)
-        else:
-            medie(df, 1)
-            mediana(df, 1)
-            standard_deviation(df, 1)
-            min_max(df, 1)
-            quantile_(df, 1)
-
         x = pd.Series(df.varsta)
+        varsta = list(x)
         y = pd.Series(df.IQ)
+        iq = list(y)
+        if column == 0:
+            medie(varsta)
+            mediana(varsta)
+            standard_deviation(varsta)
+            min_max(varsta)
+            quantile_(varsta)
+        else:
+            medie(iq)
+            mediana(iq)
+            standard_deviation(iq)
+            min_max(iq)
+            quantile_(iq)
         correlation = x.corr(y)
         print(correlation)
         plt.scatter(x, y)
