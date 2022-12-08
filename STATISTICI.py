@@ -7,6 +7,7 @@
 import os
 import statistics
 from statistics import covariance
+from statistics import median
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,29 +24,29 @@ def medie(column):
         print(suma//ct)
 
 def mediana(column):
-    ans = column.sort()
-    print(statistics.median(ans))
+    ans = sorted(column)
+    print(median(list(ans)))
 
 def standard_deviation(column):
-    ans = column.sort()
+    ans = sorted(column)
     print(np.std(ans))
 
 def min_max(column):
-    ans = column.sort()
+    ans = sorted(column)
     print(ans[0], ans[len(ans) - 1])
 
 def quantile_(column):
-    ans = column.sort()
-    ans.quantile([0.25,0.5,0.75])
+    ans = sorted(column)
+    print(np.quantile(ans, q=np.arange(0.25, 0.5, 0.75)))
 
 def corelatie(column1, column2):
-    ansAge = column1.sort()
-    ansIQ = column2.sort()
+    ansAge = sorted(column1)
+    ansIQ = sorted(column2)
     print(covariance(ansIQ,ansAge))
 
 def corrcoef_(column1, column2):
-    ansAge = column1.sort()
-    ansIQ = column2.sort()
+    ansAge = sorted(column1)
+    ansIQ = sorted(column2)
     print(np.corrcoef(ansIQ, ansAge))
 
 def main():
