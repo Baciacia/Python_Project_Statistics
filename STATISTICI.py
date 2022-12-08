@@ -14,14 +14,7 @@ import matplotlib.pyplot as plt
 
 
 def medie(column):
-    suma = ct = 0
-    for i in range(0, len(column)):
-        suma = suma + int(column[i])
-        ct = ct + 1
-    if ct == 0:
-        print(0)
-    else:
-        print(suma//ct)
+    print(statistics.mean(column))
 
 def mediana(column):
     ans = sorted(column)
@@ -32,8 +25,7 @@ def standard_deviation(column):
     print(np.std(ans))
 
 def min_max(column):
-    ans = sorted(column)
-    print(ans[0], ans[len(ans) - 1])
+    print(min(column), max(column))
 
 def quantile_(column):
     ans = sorted(column)
@@ -64,7 +56,7 @@ def main():
         print("Nu se poate calcula")
         plt.rcParams["figure.figsize"] = [7.50, 4.50]
         plt.rcParams["figure.autolayout"] = True
-        header = ['sex','nationalitate']
+        header = ['sex', 'nationalitate']
         df = pd.read_csv('info.csv', usecols=header)
         if column == 2:
             x = pd.Series(df.sex)
