@@ -55,13 +55,30 @@ def main():
         column = 0
     elif column_input == "IQ":
         column = 1
-    elif column_input == "Sex":
+    elif column_input == "sex":
         column = 2
-    elif column_input == "Nationality":
+    elif column_input == "nationality":
         column = 3
 
     if column == 2 or column == 3:
         print("Nu se poate calcula")
+        plt.rcParams["figure.figsize"] = [7.50, 4.50]
+        plt.rcParams["figure.autolayout"] = True
+        header = ['sex','nationalitate']
+        df = pd.read_csv('info.csv', usecols=header)
+        if column == 2:
+            x = pd.Series(df.sex)
+            sex = list(x)
+            print(sex)
+            plt.hist(sex)
+            plt.show()
+        else:
+            x = pd.Series(df.nationalitate)
+            nat = list(x)
+            print(nat)
+            plt.hist(nat)
+            plt.show()
+
     else:
         plt.rcParams["figure.figsize"] = [10.50, 5.50]
         plt.rcParams["figure.autolayout"] = True
